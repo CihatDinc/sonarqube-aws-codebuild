@@ -22,6 +22,8 @@ phases:
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
       - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
       - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
+      - java -version  # Java sürümünü doğrulayın
+      - $JAVA_HOME/bin/java -version  # JAVA_HOME ayarını doğrulayın
   build:
     commands:
       - echo "Build phase ..."
