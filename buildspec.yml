@@ -1,4 +1,10 @@
 version: 0.2
+env:
+  secrets-manager:
+    LOGIN: local/sonar:sonartoken
+    HOST: local/sonar:host
+    Organization: local/sonar:organization
+    Project: local/sonar:projectKey
 phases:
   install:
     commands:
@@ -24,6 +30,7 @@ phases:
       - echo "PATH is $PATH"
       - java -version
       - which java
+      - echo "Sonar host URL: $HOST"
       - ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization -X
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
