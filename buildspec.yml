@@ -7,21 +7,20 @@ env:
     Project: local/sonar:Project
 phases:
   install:
-    runtime-versions:
-      java: corretto17  # Java 17 kullanımı
-      nodejs: 16
     commands:
       - echo "Install phase ..."
+      - wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+      - tar -xzf jdk-17_linux-x64_bin.tar.gz
+      - export JAVA_HOME=$(pwd)/jdk-17
+      - export PATH=$JAVA_HOME/bin:$PATH
+      - java -version
   pre_build:
     commands:
       - echo "Pre build phase ..."
       - apt-get update
       - apt-get install -y jq
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-      - echo "Current path is >>>"
-      - sh $pwd
       - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
-      - ls $pwd
       - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
   build:
     commands:
