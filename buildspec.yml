@@ -13,7 +13,9 @@ phases:
       - tar -xzf jdk-17_linux-x64_bin.tar.gz
       - export JAVA_HOME=$(pwd)/jdk-17
       - export PATH=$JAVA_HOME/bin:$PATH
-      - java -version
+      - java -version  # Bu komut çalışıyor mu kontrol edin
+      - echo $JAVA_HOME  # JAVA_HOME'un doğru olup olmadığını kontrol edin
+      - echo $PATH  # PATH'in doğru olup olmadığını kontrol edin
   pre_build:
     commands:
       - echo "Pre build phase ..."
@@ -22,8 +24,7 @@ phases:
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
       - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
       - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
-      - java -version  # Java sürümünü doğrulayın
-      - $JAVA_HOME/bin/java -version  # JAVA_HOME ayarını doğrulayın
+      - $JAVA_HOME/bin/java -version  # Bu komut çalışıyor mu kontrol edin
   build:
     commands:
       - echo "Build phase ..."
