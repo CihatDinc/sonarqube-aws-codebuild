@@ -11,11 +11,10 @@ phases:
       - echo "Install phase ..."
       - wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
       - tar -xzf jdk-17_linux-x64_bin.tar.gz
+      - ls jdk-17/bin  # bin klasöründeki dosyaları kontrol edin
       - export JAVA_HOME=$(pwd)/jdk-17
       - export PATH=$JAVA_HOME/bin:$PATH
-      - java -version  # Bu komut çalışıyor mu kontrol edin
-      - echo $JAVA_HOME  # JAVA_HOME'un doğru olup olmadığını kontrol edin
-      - echo $PATH  # PATH'in doğru olup olmadığını kontrol edin
+      - java -version
   pre_build:
     commands:
       - echo "Pre build phase ..."
