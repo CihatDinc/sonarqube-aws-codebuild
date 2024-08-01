@@ -30,6 +30,8 @@ phases:
       - export PATH=$JAVA_HOME/bin:$PATH
       - echo "JAVA_HOME is $JAVA_HOME"
       - echo "PATH is $PATH"
+      - java -version  # Bu komut çalışıyor mu kontrol edin
+      - which java  # Kullanılan java'nın konumunu kontrol edin
       - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
