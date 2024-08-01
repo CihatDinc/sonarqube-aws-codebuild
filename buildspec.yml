@@ -1,10 +1,4 @@
 version: 0.2
-env:
-  secrets-manager:
-    LOGIN: local/sonar:sonartoken
-    HOST: local/sonar:HOST
-    Organization: local/sonar:Organization
-    Project: local/sonar:Project
 phases:
   install:
     commands:
@@ -17,22 +11,20 @@ phases:
   pre_build:
     commands:
       - echo "Pre build phase ..."
-      - apt-get update
-      - apt-get install -y jq
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
       - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
       - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
-      - $JAVA_HOME/bin/java -version  # Bu komut çalışıyor mu kontrol edin
+      - $JAVA_HOME/bin/java -version
   build:
     commands:
       - echo "Build phase ..."
-      - export JAVA_HOME=$(pwd)/jdk-17.0.12  # Doğru JAVA_HOME'u ayarlayın
+      - export JAVA_HOME=$(pwd)/jdk-17.0.12
       - export PATH=$JAVA_HOME/bin:$PATH
       - echo "JAVA_HOME is $JAVA_HOME"
       - echo "PATH is $PATH"
-      - java -version  # Java sürümünü kontrol edin
-      - which java  # Kullanılan java'nın konumunu kontrol edin
-      - ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization -X  # Detaylı log için -X kullanın
+      - java -version
+      - which java
+      - ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization -X
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
