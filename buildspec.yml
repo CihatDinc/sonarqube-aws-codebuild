@@ -11,7 +11,9 @@ phases:
       - echo "Install phase ..."
       - wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
       - tar -xzf jdk-17_linux-x64_bin.tar.gz
-      - ls jdk-17/bin  # bin klasöründeki dosyaları kontrol edin
+      - ls  # Ana dizindeki dosyaları kontrol edin
+      - tar -tzf jdk-17_linux-x64_bin.tar.gz  # Arşiv içeriğini kontrol edin
+      - mv jdk-17* jdk-17  # Gerekirse, dosyaları 'jdk-17' adında bir dizine taşıyın
       - export JAVA_HOME=$(pwd)/jdk-17
       - export PATH=$JAVA_HOME/bin:$PATH
       - java -version
